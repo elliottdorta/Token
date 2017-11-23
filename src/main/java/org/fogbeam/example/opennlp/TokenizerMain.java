@@ -2,7 +2,10 @@
 package org.fogbeam.example.opennlp;
 
 
+import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -15,7 +18,37 @@ public class TokenizerMain
 {
 	public static void main( String[] args ) throws Exception
 	{
-		 
+		  String buffer = null;
+		  File archivo = null;
+	      FileReader fr = null;
+	      BufferedReader br = null;
+
+	      try {
+	         // Apertura del fichero y creacion de BufferedReader para poder
+	         // hacer una lectura comoda (disponer del metodo readLine()).
+	         archivo = new File (args[0]);
+	         fr = new FileReader (archivo);
+	         br = new BufferedReader(fr);
+
+	         // Lectura del fichero
+	         String linea;
+	         while((linea=br.readLine())!=null)
+	            buffer = buffer + linea;
+	      }
+	      catch(Exception e){
+	         e.printStackTrace();
+	      }finally{
+	         // En el finally cerramos el fichero, para asegurarnos
+	         // que se cierra tanto si todo va bien como si salta 
+	         // una excepcion.
+	         try{                    
+	            if( null != fr ){   
+	               fr.close();     
+	            }                  
+	         }catch (Exception e2){ 
+	            e2.printStackTrace();
+	         }
+	      }
 		// the provided model
 		// InputStream modelIn = new FileInputStream( "models/en-token.bin" );
 
@@ -31,9 +64,7 @@ public class TokenizerMain
 			
 				/* note what happens with the "three depending on which model you use */
 			String[] tokens = tokenizer.tokenize
-					(  "A ranger journeying with Oglethorpe, founder of the Georgia Colony, " 
-							+ " mentions \"three Mounts raised by the Indians over three of their Great Kings" 
-							+ " who were killed in the Wars.\"" );
+					(buffer);
 			
 			for( String token : tokens )
 			{
