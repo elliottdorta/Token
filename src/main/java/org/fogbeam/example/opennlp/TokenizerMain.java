@@ -16,13 +16,35 @@ import opennlp.tools.tokenize.TokenizerModel;
 
 public class TokenizerMain
 {
+	
+	/**
+	 * The main method.
+	 * @author Elliott Dorta
+	 * @version 1.1
+	 * @param args the arguments
+	 * @throws Exception the exception
+	 * 
+	 */
 	public static void main( String[] args ) throws Exception
 	{
+		 
+		/**
+		 * Carga de archivo: Método que carga un archivo desde línea de comando y comprueba si hubo fallos o no.
+		 * @param buffer almacena contenido del archivo
+		 * @param file crea un objeto tipo file
+		 * @param fr crea un objetio tipo filereader
+		 * @param br crea un objeto tipo buffered
+		 * @throws Exception the exception
+		 * 
+		 */
+		
 		  String buffer = null;
 		  File archivo = null;
 	      FileReader fr = null;
 	      BufferedReader br = null;
-
+	      
+	      
+	      
 	      try {
 	         // Apertura del fichero y creacion de BufferedReader para poder
 	         // hacer una lectura comoda (disponer del metodo readLine()).
@@ -52,7 +74,12 @@ public class TokenizerMain
 		// the provided model
 		// InputStream modelIn = new FileInputStream( "models/en-token.bin" );
 
-		
+	      /**
+			 * Tokeniza un sting de entrada al que se la pasa un modelo de entramiento y un string para tokenizar.
+			 * @param modelIn crea un objeto de tipo fileInput que sera el modelo de entramiento
+			 * @param model crea un objeto TokenizerModel
+			 *
+			 */
 		// the model we trained
 		InputStream modelIn = new FileInputStream( "models/en-token.model" );
 		
